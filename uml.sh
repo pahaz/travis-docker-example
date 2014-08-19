@@ -64,7 +64,6 @@ sleep 5
 
 # Use docker
 docker run ubuntu /bin/echo hello world
-id=$(echo "exho 'hi'" | docker run -i -a stdin ubuntu:latest /bin/bash -c "mkdir -p /test && cat > /test/run.sh")
+id=$(docker run -d -v $HOME:/test $IMAGE /bin/bash -c "cd /test && sh run.sh > result")
+docker attach $id
 test $(docker wait $id) -eq 0
-docker commit $id tested:latest > /dev/null
-
