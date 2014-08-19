@@ -63,7 +63,7 @@ docker -d &
 sleep 5
 
 # Use docker
-docker run ubuntu /bin/echo hello world
-id=$(docker run -d -v $WORKDIR:/test $IMAGE /bin/bash -c "cd /test && sh test.sh > result")
+docker run ubuntu:latest /bin/echo hello world
+id=$(docker run -d -v $WORKDIR:/test ubuntu:latest /bin/bash -c "cd /test && sh test.sh > result")
 docker attach $id
 test $(docker wait $id) -eq 0
